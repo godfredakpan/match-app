@@ -1,0 +1,6 @@
+/* on mobile navbar should have margin top */
+@media(max-width: 480px) {
+    .navbar {
+        margin-top: 50px !important;
+    }
+}

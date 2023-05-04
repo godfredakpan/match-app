@@ -177,6 +177,10 @@ const Container = styled.div`
   .message{
     color: #fff;
   }
+  @media(max-width: 480px) {
+    height: 70vh;
+    grid-template-rows: 20% 60% 10%;
+}
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     grid-template-rows: 15% 70% 15%;
   }

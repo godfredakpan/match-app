@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StripeCheckout from 'react-stripe-checkout';
-import { minusCredit, updateCredit } from '../services/user';
+import {  updateCredit } from '../services/user';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import calculateCost from './elements/CreditCalculator';
+
 
 const PaymentForm = ({ amount, totalMessage }) => {
   
-  const [token, setToken] = useState(null);
+  const [, setToken] = useState(null);
 
   const [currentUser, setCurrentUser] = useState(undefined);
 

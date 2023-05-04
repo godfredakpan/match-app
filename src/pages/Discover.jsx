@@ -7,14 +7,12 @@ import React, { useEffect, useState } from "react";
 import { getAllModerators } from "../services/user";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "./elements/Image";
 import Logo from "../assets/logo.svg";
-import Loader from "../assets/loader.gif";
 import { useNavigate } from "react-router-dom";
 export default function Discover() {
 
   const [dates, setDates] = useState([]);
-  const [loading, setLoading] = useState([]);
+  const [, setLoading] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [LeavePerPage] = useState(10);
   const navigate = useNavigate();

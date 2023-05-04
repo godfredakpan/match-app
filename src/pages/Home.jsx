@@ -2,93 +2,21 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react/jsx-no-target-blank */
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+// import axios from "axios";
 
-import { useNavigate, Link } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+// import { useNavigate,  } from "react-router-dom";
+import { ToastContainer, } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { registerRoute } from "../utils/APIRoutes";
+// import { registerRoute } from "../utils/APIRoutes";
 import Image from "./elements/Image";
 import Logo from "../assets/logo.svg";
 import FieldIco1 from "../general/img/field_ico_1.svg";
 import FieldIco2 from "../general/img/field_ico_2.svg";
 import FieldIco3 from "../general/img/field_ico_3.svg";
-import FieldIco4 from "../general/img/field_ico_4.svg";
+// import FieldIco4 from "../general/img/field_ico_4.svg";
 
 export default function Home() {
-  const navigate = useNavigate();
-  const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
-    pauseOnHover: true,
-    draggable: true,
-    theme: "dark",
-  };
-  const [values, setValues] = useState({
-    username: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
-
-
-
-  const handleChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
-  };
-
-  const handleValidation = () => {
-    const { password, confirmPassword, username, email } = values;
-    if (password !== confirmPassword) {
-      toast.error(
-        "Password and confirm password should be same.",
-        toastOptions
-      );
-      return false;
-    } else if (username.length < 3) {
-      toast.error(
-        "Username should be greater than 3 characters.",
-        toastOptions
-      );
-      return false;
-    } else if (password.length < 8) {
-      toast.error(
-        "Password should be equal or greater than 8 characters.",
-        toastOptions
-      );
-      return false;
-    } else if (email === "") {
-      toast.error("Email is required.", toastOptions);
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (handleValidation()) {
-      const { email, username, password } = values;
-      const { data } = await axios.post(registerRoute, {
-        username,
-        email,
-        password,
-      });
-
-      if (data.status === false) {
-        toast.error(data.msg, toastOptions);
-      }
-      if (data.status === true) {
-        localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
-          JSON.stringify(data.user)
-        );
-        navigate("/");
-      }
-    }
-  };
-
   return (
     <>
       <div class="landing overflow-v">

@@ -1,7 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { Buffer } from "buffer";
 import loader from "../assets/loader.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,7 +11,7 @@ import UploadCloudinary from "../services/cloudinary/UploadCloudinary";
 export default function SetAvatar() {
 
   const navigate = useNavigate();
-  const [avatars, setAvatars] = useState(
+  const [avatars, ] = useState(
     [
       "https://api.multiavatar.com/4645641.svg",
       "https://api.multiavatar.com/4645642.svg",
@@ -34,7 +34,7 @@ export default function SetAvatar() {
   };
   const [image, setImage] = useState(null);
   const [uploadLoading, setUploadLoading] = useState(false);
-  const [alertMessage, setAlertMessage] = useState({ type: '', message: '' });
+  const [, setAlertMessage] = useState({ type: '', message: '' });
 
   useEffect(async () => {
     if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))

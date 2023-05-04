@@ -8,10 +8,7 @@ import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import NavBar from "../components/NavBar";
-import { Button, Modal } from "react-bootstrap";
 
-import CheckoutForm from "./Checkout";
-import PaymentModal from "./PaymentModal";
 
 export default function Chat() {
   const navigate = useNavigate();

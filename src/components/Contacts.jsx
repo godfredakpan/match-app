@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import "./Contacts.css";
 
 export default function Contacts({ contacts, changeChat }) {
-  const [currentUserName, setCurrentUserName] = useState(undefined);
+  const [, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
   useEffect(async () => {
