@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-import 'material-react-toastify/dist/ReactToastify.css';
+// import 'material-react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
 
 const NavBar = () => {
