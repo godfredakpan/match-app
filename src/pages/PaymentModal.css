@@ -1,0 +1,121 @@
+.modal-container {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background: #ffffff;
+    color: #111111;
+    position: absolute;
+    width: 100%;
+    /* max-width: 900px; */
+    top: 10%;
+    left: 50%;
+    text-align: center;
+    padding: 20px 30px;
+    transition: top .25s;
+    -webkit-transform: translate(-50%,0);
+    -moz-transform: translate(-50%,0);
+    -o-transform: translate(-50%,0);
+    -ms-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+  }
+
+  .modal-container h3,
+.modal-container h4 {
+  font-size: 15px;
+  font-weight: 600;
+}
+.modal-container input[type="text"] {
+  margin-bottom: 5px;
+}
+.modal-container input[type="radio"] {
+  display: none;
+}
+.modal-container input[type="radio"]+label {
+  background: none;
+  color: #111111;
+  border: none;
+  width: 48%;
+  margin-top: 0;
+  margin-right: 4%;
+  float: left;
+}
+.modal-container input[type="radio"]+label:last-of-type {
+  margin-right: 0;
+}
+.modal-container .auto-suggest {
+  position: relative;
+}
+.modal-container .age-warning {
+  color: #f00;
+  font-weight: 700;
+}
+.modal-container .bundles {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.modal-container .bundle input[type="radio"]+label {
+  width: 100%;
+  margin: 0 0 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
+.modal-container .bundle input[type="radio"]+label .number {
+  font-weight: 600;
+  font-size: 24px;
+}
+.modal-container .bundle input[type="radio"]+label .price {
+  font-weight: 400;
+}
+.modal-container .bundle input[type="radio"]+label small {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.modal-container .bundle input[type="radio"]+label.method-wrap {
+  padding: 10px;
+  text-align: left;
+  line-height: 30px;
+}
+.modal-container .bundle input[type="radio"]+label.method-wrap .img {
+  margin-right: 5px;
+}
+.modal-container .bundle input[type="radio"]+label.active {
+  background: #FF7F0F;
+  color: #000000;
+}
+.modal-container .bundle input[type="radio"]+label.active.method-wrap {
+  background-color: #FF7F0F;
+  background-color: rgba(255,127,15,0.7);
+  zoom: 1;
+  pointer-events: none;
+}
+.modal-container .credits-buy-button {
+  margin: 0 0 10px;
+}
+.modal-container .payment-footer {
+  color: #777777;
+  font-size: 12px;
+}
+.modal-container .back-to-step-1 {
+  text-decoration: underline;
+  margin-bottom: 20px;
+  color: #FF7F0F;
+  cursor: pointer;
+}
+
+.buy-btn{
+    color: #fff !important;
+}
+
+.StripeCheckout{
+    font-size: small !important;
+}
+
+.payment-limited-header{
+  background-color: #1e275877 !important;
+  color: #1e2758 !important;
+  font-size: 15px !important;
+  font-weight: 900  !important;
+  padding: 10px;
+}

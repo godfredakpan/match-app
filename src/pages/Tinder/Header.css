@@ -1,0 +1,23 @@
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /*  */
+    z-index: 100;
+}
+
+.header__logo {
+    /*  */
+    object-fit: contain;
+    height: 40px;
+}
+
+.header__icon {
+    padding: 5px;
+}
+
+.username{
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 10px;
+}

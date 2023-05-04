@@ -1,0 +1,103 @@
+.username{
+    font-size: 20px;
+    font-weight: 600;
+    margin-left: 10px;
+    color: white !important;
+}
+
+.contact{
+    background-color: #ffffff !important;
+    color: #ec5e6f !important;
+    cursor: pointer;
+    font-size: medium;
+    height: 100px;
+}
+
+.selected{
+    background-color: #070420 !important;
+    color: white !important;
+    font-size: medium;
+    height: 100px;
+    cursor: pointer;
+}
+
+.text-contact{
+    color: #ec5e6f !important;
+    margin-top: 20px;
+    cursor: pointer;
+    text-align: center;
+    font-size: medium;
+    height: 100px;
+}
+
+.text-selected{
+    color: white !important;
+    font-size: medium;
+    margin-top: 20px;
+    text-align: center;
+    height: 100px;
+    cursor: pointer;
+}
+
+.sidebar{
+    overflow-y: scroll;
+    height: 100vh;
+    background-color: #fff;
+    border-right: 1px solid lightgray;
+}
+
+.current-user{
+    position: absolute;
+    bottom: 0;
+}
+
+.current-user, .avatar{
+    /* display: flex; */
+    align-items: center !important;
+    text-align: center;
+    /* padding: 10px; */
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.contacts{
+    display: flex;
+    align-items: center;
+    /* padding: 10px; */
+    cursor: pointer;
+    
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+    gap: 0.9rem;
+    }
+    .contact {
+      background-color: #ffffff34;
+      min-height: 10rem;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 0.2rem;
+      padding: 0.3rem;
+      /* display: flex; */
+      gap: 1rem;
+      align-items: center;
+      transition: 0.5s ease-in-out;
+      }
+      .username
+        {
+          margin-top: 15px;
+          color: white;
+          /* font-size: 5rem; */
+    }
+    .selected {
+      background-color: #9a86f3;
+
+  }
+  .user{
+    color: white !important;
+    text-align: center;
+  }
