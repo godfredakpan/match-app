@@ -63,7 +63,7 @@ export default function Chat() {
 
   return (
     <>
-            <div className="light white-content">
+            <div className="dark dark-content" style={{backgroundColor: '#080420'}}>
                 <div className="wrapper">
                     <>
                         <div className="sidebar">
@@ -79,7 +79,7 @@ export default function Chat() {
                     <div className="main-panel">
                         <NavBar />
                         {/* <CheckoutForm amount={100} />  */}
-                        <div className="content">
+                        <div className="content" style={{backgroundColor: '#080420'}}>
                             <div className="row">
                                 <div className="col-md-8">
                                     <div className="card mx-auto" style={{ backgroundColor: '#080420', width: '200vh' }}>
