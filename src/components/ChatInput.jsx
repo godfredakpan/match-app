@@ -114,7 +114,7 @@ const Container = styled.div`
       width: 100%;
       height: 60%;
       background-color: transparent;
-      color: white;
+      color: white !important;
       border: none;
       padding-left: 1rem;
       font-size: 1.2rem;
@@ -131,7 +131,7 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #9a86f3;
+      background-color: #e6304e;
       border: none;
       @media screen and (min-width: 720px) and (max-width: 1080px) {
         padding: 0.3rem 1rem;

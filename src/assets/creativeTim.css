@@ -86,8 +86,10 @@
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
+    height: max-content !important;
     color: #525f7f;
     text-align: left;
+    
     /* background-color: #1d4d70; */
   }
   
@@ -14575,7 +14577,7 @@
       color: #9A9A9A;
     }
   }
-  
+/*   
   .footer {
     padding: 24px 0 24px 250px;
   }
@@ -14663,7 +14665,7 @@
       float: none;
       padding-left: 0;
     }
-  }
+  } */
   
   /* Form controls */
   .form-control::-moz-placeholder {
@@ -17337,11 +17339,11 @@
   
   .sidebar,
   .off-canvas-sidebar {
-    background: #1e2758;
-    background: -webkit-linear-gradient(0deg, #1e2758 0%, #1e2758 100%);
+    /* background: #1e2758; */
+    /* background: -webkit-linear-gradient(0deg, #1e2758 0%, #1e2758 100%);
     background: -o-linear-gradient(0deg, #1e2758 0%, #1e2758 100%);
     background: -moz-linear-gradient(0deg, #1e2758 0%, #1e2758 100%);
-    background: linear-gradient(0deg, #1e2758 0%, #1e2758 100%);
+    background: linear-gradient(0deg, #1e2758 0%, #1e2758 100%); */
     height: calc(100vh - 90px);
     width: 120px;
     position: fixed;
@@ -17351,7 +17353,7 @@
     background-size: cover;
     background-position: center center;
     display: block;
-    box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.6);
+    /* box-shadow: 0px 0px 45px 0px rgba(0, 0, 0, 0.6); */
     margin-top: 80px;
     margin-left: 20px;
     border-radius: 5px;
@@ -20444,3 +20446,51 @@
   
   /*# sourceMappingURL=dashboard-free.css.map */
   
+  .card-auth {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card-auth:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }
+  
+  /* Add some padding inside the card container */
+  .container-auth {
+    padding: 2px 16px;
+  }
+
+  .title{
+    color: #1d4d70;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /* background-color: #666; */
+  }
+
+
+  /* on mobile add padding */
+  @media (max-width: 767.98px) {
+    .card-auth {
+      padding: 0 15px !important;
+    }
+    .container-auth{
+      margin: 100px 205px !important;
+      height: 200rem !important;
+    }
+
+    .footer, .navbar {
+      /* position down */
+      display: none;
+    }
+  }
+
+  .footer {
+    /* position down */
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }

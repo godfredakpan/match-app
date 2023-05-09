@@ -125,7 +125,7 @@ export default function ChatContainer({ currentChat, socket }) {
             <h3 className="username-top">{currentChat.name}</h3>
           </div>
         </div>
-        <Logout />
+        {/* <Logout /> */}
       </div>
       <div className="chat-messages">
         {messages.map((message) => {
@@ -172,7 +172,7 @@ const Container = styled.div`
   height: 85vh;
   overflow: hidden;
   .username-top{
-    color: #fff;
+    color: #e6304e;
   }
   .message{
     color: #fff;

@@ -1,5 +1,5 @@
 import request from 'umi-request';
-import { loginRoute, createFavoriteRoute, registerRoute, allModeratorsRoute, createModeratorsRoute, updateCreditRoute, minusCreditRoute } from '../utils/APIRoutes.js';
+import { loginRoute, createFavoriteRoute, registerRoute, allModeratorsRoute, createModeratorsRoute, updateCreditRoute, minusCreditRoute, allFavouriteRoute } from '../utils/APIRoutes.js';
 
 export async function loginUser(credentials) {
     return request(`${loginRoute}`, {
@@ -27,6 +27,17 @@ export async function getAllUsers() {
 
 export async function getAllModerators() {
     return request(`${allModeratorsRoute}/users`, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+      },
+    });
+  }
+
+  export async function getAllFavorite() {
+    return request(`${allFavouriteRoute}`, {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',

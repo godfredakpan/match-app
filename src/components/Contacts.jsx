@@ -40,18 +40,19 @@ export default function Contacts({ contacts, changeChat }) {
                   }`}
                   onClick={() => changeCurrentChat(index, contact)}
                 >
+                  <hr style={{ borderTop: '5px solid red'}}></hr>
                   <div className="avatar">
                     <img
                       src={`${contact.avatarImage}`}
                       alt=""
-                      className="avatar"
+                      className=""
                       width={50}
                     />
                   </div>
                   <div>
-                    <h3 className={`text-contact ${
+                    <span className={`text-contact ${
                     index === currentSelected ? "text-selected" : ""
-                  }`}>{contact.name}</h3>
+                  }`}>{contact.name}</span>
                   </div>
                 </div>
               );

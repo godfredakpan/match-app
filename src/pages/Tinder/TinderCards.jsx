@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 
 // import css
 import './TinderCards.css';
@@ -19,142 +19,265 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { createFavoriteRoute } from '../../utils/APIRoutes';
 import { generateModerator } from '../elements/GeneratePeople';
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+
+import LogoLight from "../../assets/flirtLogoDark.svg";
+import SideBar from '../../components/SideBar';
 
 
 function TinderCards() {
+    const [people, setPeople] = useState([
+        {
+            name: 'Loading...',
+            avatarImage: 'https://miro.medium.com/v2/resize:fit:1400/1*CsJ05WEGfunYMLGfsT2sXA.gif'
+        },
+    ]);
+    const [values, setValues] = useState({
+        minAge: 18,
+        maxAge: 30,
+        gender: "",
+        region: "",
+        appearance: "",
+        hairColor: "",
 
-    const [people, setPeople] = useState([]);
-
-    const navigate = useNavigate();
-
+    });
     const [currentIndex, setCurrentIndex] = useState(people.length - 1)
+    const [lastDirection, setLastDirection] = useState()
+    const currentIndexRef = useRef(currentIndex)
+
+    const childRefs = useMemo(
+        () =>
+            Array(people.length)
+                .fill(0)
+                .map((i) => React.createRef()),
+        []
+    )
+
+    const updateCurrentIndex = (val) => {
+        setCurrentIndex(val)
+        currentIndexRef.current = val
+    }
 
     const canGoBack = currentIndex < people.length - 1
 
     const canSwipe = currentIndex >= 0
 
-    const currentIndexRef = useRef(currentIndex)
-
-    const childRefs = useMemo(
-        () =>
-          Array(people.length)
-            .fill(0)
-            .map((i) => React.createRef()),
-        []
-      )
-
-      const updateCurrentIndex = (val) => {
-        setCurrentIndex(val)
-        currentIndexRef.current = val
-      }
-
-    useEffect(() => {
-        async function fetchData(){
-            const response = await getAllModerators();
-            setPeople(response)
-        };
-        fetchData();
-    }, []);
-
-    const swiped = (direction, contact) => {
-        // localStorage.setItem('lovedContact', JSON.stringify(contact));
-        console.log("removing: " + JSON.stringify(contact));
-    }
-
-    const outOfFrame = (name) => {
-        console.log(name + " left the screen!")
-    }
-
-    const chatWithUser = async(contact) => {
-
-
-      const data  = await axios.post(createFavoriteRoute, {
-        ...contact,
-        id: contact._id,
-        user_id: await JSON.parse(
-            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-          )._id,
-      });
-
-      console.log('contact', contact);
-
-      if (data.id) {
-        localStorage.setItem('lovedContact', JSON.stringify(contact));
-        navigate("/meet");
-      }
-
-      if (data.status === 202) {
-        localStorage.setItem('lovedContact', JSON.stringify(contact));
-        navigate("/meet");
-      }
-
-      if (!data._id) {
-        toast.error('Something went wrong, please try again')
-      }
-        
-    }
-
-    const swipe = async (dir) => {
-        if (canSwipe && currentIndex < people.length) {
-          await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
+    // set last direction and decrease current index
+    const swiped = (direction, index, contact) => {
+        if (direction === 'right') {
+            createFav(contact);
+            localStorage.setItem('lovedContact', JSON.stringify(contact));
         }
-      }
+        setLastDirection(direction)
+        updateCurrentIndex(index - 1)
+    }
 
-      const goBack = async () => {
+    const outOfFrame = (name, idx) => {
+        currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
+    }
+
+    const swipe = async (dir, contact) => {
+        if (dir === 'right') {
+            createFav(contact);
+            toast.success(`Added ${contact.name} to your favorites`);
+            localStorage.setItem('lovedContact', JSON.stringify(contact));
+        }
+        if (dir === 'left') {
+            toast.info(`Skipped ${contact.name}`);
+        }
+        if (canSwipe && currentIndex < people.length) {
+            await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
+        }
+    }
+
+    // increase current index and show card
+    const goBack = async () => {
         if (!canGoBack) return
         const newIndex = currentIndex + 1
         updateCurrentIndex(newIndex)
         await childRefs[newIndex].current.restoreCard()
-      }
+    }
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        async function fetchData() {
+            const response = await getAllModerators();
+            setPeople(response)
+            generateModerator()
+        };
+        fetchData();
+    }, []);
+
+    // const swiped = (direction, contact) => {
+    //     if(direction === 'left'){
+    //         createFav(contact);
+    //         localStorage.setItem('lovedContact', JSON.stringify(contact));
+    //     }
+    // }
+
+    // const outOfFrame = (name) => {
+    //     console.log(name + " left the screen!")
+    // }
+
+    const createFav = async (contact) => {
+        await axios.post(createFavoriteRoute, {
+            ...contact,
+            id: contact._id,
+            user_id: await JSON.parse(
+                localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+            )._id,
+        });
+    }
+
+    const chatWithUser = async (contact) => {
+        const data = await axios.post(createFavoriteRoute, {
+            ...contact,
+            id: contact._id,
+            user_id: await JSON.parse(
+                localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+            )._id,
+        });
+
+        if (data.id) {
+            localStorage.setItem('lovedContact', JSON.stringify(contact));
+            navigate("/meet");
+        }
+
+        if (data.status === 202) {
+            localStorage.setItem('lovedContact', JSON.stringify(contact));
+            navigate("/meet");
+        }
+
+        if (!data._id) {
+            toast.error('Something went wrong, please try again')
+        }
+
+    }
+
+    const handleChange = (event) => {
+        setValues({ ...values, [event.target.name]: event.target.value });
+    };
 
     return (
-        <div className="tinderCards" >
-            <div className="tinderCards__cardContainer" style={{marginTop: '20px'}}>
-            <button onClick={()=>  generateModerator()}></button>
-                {people.map((person) => (
-                    <TinderCard
-                        className="swipe"
-                        key={person.name}
-                        onSwipe={(dir) => swiped(dir, person)}
-                        preventSwipe={["up", "down"]}
-                        children={()=> console.log('person', person)}
-                        onCardLeftScreen={() => outOfFrame(person.name)}
-                    >
-                        
-                        <div
-                            className="card"
-                            style={{ backgroundImage: `url(${person.avatarImage})` }}
-                        >
-                            <h4 className='photo-name'>{person.name}<br/>
-                            <span style={{fontSize:'12px'}}>{person.age}</span>
-                            </h4>
-                            {/* <IconButton className="love__btn">
-                                <Favorite fontSize="medium" />
-                            </IconButton> */}
-                            <div className="swipeButtons">
-                            {/* <IconButton onClick={() => goBack()} className="swipeButtons__left">
-                                <ReplayIcon fontSize="medium" />
-                            </IconButton> */}
-                            <IconButton onClick={() => swipe('left')} className="swipeButtons__left">
-                                <CloseIcon fontSize="medium" />
-                            </IconButton>
-                            <IconButton onClick={()=>chatWithUser(person)} className="swipeButtons__star">
-                                <SendIcon fontSize="medium" />
-                            </IconButton>
-                            <IconButton onClick={()=>chatWithUser(person)} className="love__btn">
-                                <Favorite fontSize="medium" />
-                            </IconButton>
-                        {/* <button onClick={()=>  generateModerator()}>Generate</button> */}
-                        {/* <IconButton className="swipeButtons__lightning">
-                            <FlashOnIcon fontSize="large" />
-                        </IconButton> */}
-                    </div>
+        <>
+          <ToastContainer />
+            <div className='row'>
+                <div className='col-md-8' style={{ marginTop: '50px' }}>
+                    <div class="filter container">
+                       
+                        <div class="filter-options" data-cnt="extended-filters" data-searchbar="filters">
+                            <div class="column">
+                                <div>
+                                    <label for="age-value">Age</label>
+                                    <p class="slider-text">
+                                        {/* min input field */}
+                                        <input type="text" id="age-value" name='minAge' onChange={(e) => handleChange(e)} data-field="minAge" value={values.minAge} />
+                                        {/* max input field */}
+                                        <input type="text" id="age-value" name='maxAge' onChange={(e) => handleChange(e)} data-field="maxAge" value={values.maxAge} />
+                                    </p>
+                                  
+                                    <p></p>
+                                    {/* <div class="slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style={{ left: '11.1111%', width: '2.46914%' }}></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style={{ left: '11.1111%' }}></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default fa fa-dropdown" style={{ left: '13.5802%' }}></span></div> */}
+                                </div>
+                                <div class="form-field dropdowns">
+                                    <select data-field="gender" name='gender' onChange={(e) => handleChange(e)} required="" data-type="dropdown">
+                                        <option value="all" selected="">
+                                            Gender        </option>
+                                        <option value="male">Man</option>
+                                        <option selected="selected" value="female">Woman</option></select>
+                                </div>
+                                <div class="form-field dropdowns">
+                                    <select data-field="region" name='region' onChange={(e) => handleChange(e)} required="" data-type="dropdown">
+                                        <option value="all" selected="">
+                                            All states </option>
+                                        <option>Alabama</option>
+                                        <option>Alaska</option>
+                                        <option>Arizona</option>
+                                        <option>Arkansas</option>
+                                        <option>California</option>
+                                        <option>Colorado</option>
+                                        <option>Connecticut</option>
+                                        <option>Delaware</option>
+                                        <option>Florida</option>
+                                        <option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option><option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option><option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option><option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option><option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option><option>Vermont</option><option>Virginia</option><option>Washington</option><option>Washington, D.C.</option><option>West Virginia</option><option>Wisconsin</option><option>Wyoming</option></select>
+                                </div>
+                            </div>
+                            <div class="column">
+                                <div class="form-field dropdowns">
+                                    <select onChange={(e) => handleChange(e)} id="appearance" name="appearance" data-field="appearance" data-required="false">
+                                        <option selected="selected" value="default" disabled="">Appearance</option>
+                                        <option value="all">All appearances</option>
+                                        <option value="asian">Asian</option><option value="ebony">Ebony</option><option value="arabic">Arabic</option><option value="white">White</option><option value="latin">Latin</option></select>
+                                </div>
+                                <div class="form-field dropdowns">
+                                    <select data-field="hairColor" name='hairColor' onChange={(e) => handleChange(e)} required="" data-type="dropdown">
+                                        <option value="all" selected="">
+                                            Hair
+                                        </option>
+                                        <option value="blond">Blond</option>
+                                        <option value="darkblond">Dark blond</option>
+                                        <option value="brown">Brown</option>
+                                        <option value="black">Black</option>
+                                        <option value="bald">Bald</option>
+                                        <option value="red">Red</option>
+                                        <option value="grey">Grey</option>
+                                        <option value="colored">Other</option>
+                                    </select>
+                                </div>
+                                <div class="button filter-search" data-searchbutton="">Search</div>
+                            </div>
                         </div>
-                    </TinderCard>
-                ))}
-            </div>
-        </div>
+                    </div>
+
+                    {/* </div> */}
+                    <div className='container'>
+                        <div className="row">
+                            <div className="tinderCards__cardContainer">
+                                
+                                {people.map((person, index) => (
+                                    <TinderCard
+                                        ref={childRefs[index]}
+                                        className="swipe"
+                                        key={person.name}
+                                        restoreCard={true}
+                                        onSwipe={(dir) => swiped(dir, index, person)}
+                                        preventSwipe={["up", "down"]}
+                                        children={() => console.log('person', person)}
+                                        onCardLeftScreen={() => outOfFrame(person.name, index)}
+                                    >
+
+                                        <div
+                                            className="card"
+                                            style={{ backgroundImage: `url(${person.avatarImage})` }}
+                                        >
+                                            <h4 className='photo-name'>{person.name}<br />
+                                                <span style={{ fontSize: '12px' }}>{person.age}</span>
+                                            </h4>
+
+                                            <div className="swipeButtons">
+
+                                                <IconButton onClick={() => swipe('left', person)} className="swipeButtons__left">
+                                                    <CloseIcon fontSize="medium" />
+                                                </IconButton>
+                                                <IconButton onClick={() => chatWithUser(person)} className="swipeButtons__star">
+                                                    <SendIcon fontSize="medium" />
+                                                </IconButton>
+                                                <IconButton onClick={() => swipe('right', person)} className="love__btn">
+                                                    <Favorite fontSize="medium" />
+                                                </IconButton>
+
+                                            </div>
+                                        </div>
+                                    </TinderCard>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <SideBar />
+            </div></>
     );
 }
 

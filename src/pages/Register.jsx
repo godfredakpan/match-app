@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { registerRoute } from "../utils/APIRoutes";
 import "../assets/creativeTim.css";
+import AuthNav from "../components/AuthNav";
 
 
 export default function Register() {
@@ -108,137 +109,112 @@ export default function Register() {
 
   return (
     <>
-      <FormContainer>
-        <form action="" onSubmit={(event) => handleSubmit(event)}>
-          <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h1>Get Love</h1>
-          </div>
-          <input
-            type="text"
-            placeholder="Name"
+  <AuthNav/>
+  <div style={{ height: '100vh'}}>
+    <h1 className="title">Register</h1>
+      <div className="container card-auth " style={{marginTop: '20px'}}>
+      <form action="" onSubmit={(event) => handleSubmit(event)} style={{padding: '10px'}}>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Name</label>
+            <input type="email" class="form-control" placeholder="Name"
             name="name"
-            onChange={(e) => handleChange(e)}
-          />
-           <input
-            type="text"
-            placeholder="Username"
-            name="username"
-            onChange={(e) => handleChange(e)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
+            onChange={(e) => handleChange(e)} id="inputEmail4"/>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control"
             name="email"
-            onChange={(e) => handleChange(e)}
-          />
-           <input
-            type="looking_for"
-            placeholder="Looking for"
-            name="looking_for"
-            onChange={(e) => handleChange(e)}
-          />
-           <input
+            onChange={(e) => handleChange(e)} id="inputEmail4" placeholder="Email"/>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Username</label>
+            <input type="username" class="form-control"
+            name="username"
+            onChange={(e) => handleChange(e)} id="inputEmail4" placeholder="sexy_20"/>
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Looking For?</label>
+            <select placeholder="Select" className="form-control" name="looking_for"  onChange={(e) => handleChange(e)}>
+            <option value="Woman">Woman</option>
+            <option value="Man">Man</option>
+          </select>
+          </div>
+
+          <div class="form-group col-md-6">
+          <label for="inputEmail4">Birth Day</label>
+          <input className="form-control" type="date" name="birthday" onChange={(e) => handleChange(e)} />
+          </div>
+
+          <div class="form-group col-md-6">
+          <label for="inputEmail4">Age</label>
+          <input
             type="number"
-            placeholder="Age"
+            className="form-control"
             name="age"
             onChange={(e) => handleChange(e)}
           />
-           <textarea
+          </div>
+
+          <div class="form-group col-md-12">
+            <label for="inputPassword4">About You</label>
+            <textarea
             type="about"
-            placeholder="About you"
+            className="form-control"
             name="about"
             onChange={(e) => handleChange(e)}
           />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputAddress">Password</label>
           <input
             type="password"
             placeholder="Password"
+            className="form-control"
             name="password"
             onChange={(e) => handleChange(e)}
           />
+          
+        </div>
+        <div class="form-group">
+          <label for="inputAddress2">Confirm Password</label>
           <input
             type="password"
+            className="form-control"
             placeholder="Confirm Password"
             name="confirmPassword"
             onChange={(e) => handleChange(e)}
           />
-          <button type="submit">Create User</button>
+        </div>
+        <button className="btn btn-primary" type="submit">Sign up</button>
           <span>
             Already have an account ? <Link to="/login">Login.</Link>
           </span>
+
         </form>
-      </FormContainer>
+      </div>
       <ToastContainer />
+      <footer class="footer" >
+                <div class="new-container">
+                {/* <img src={Logo} className="footer__logo" width={50}/> */}
+                    <ul class="footer__links">
+                        <li>
+                            <a href="#" target="_blank">Privacy policy</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">Terms of use</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">© {new Date().getFullYear()} MatchDay</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+      </div>
     </>
   );
 }
-
-const FormContainer = styled.div`
-  height: 100vh;
-  // width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  align-items: center;
-  background-color: #131324;
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    img {
-      height: 5rem;
-    }
-    h1 {
-      color: white;
-      text-transform: uppercase;
-    }
-  }
-
-  form {
-    display: flex;
-    width: 500px;
-    flex-direction: column;
-    gap: 1rem;
-    background-color: #00000076;
-    border-radius: 2rem;
-    padding: 3rem 5rem;
-  }
-  input,textarea {
-    background-color: transparent;
-    padding: 1rem;
-    border: 0.1rem solid #4e0eff;
-    border-radius: 0.4rem;
-    color: white;
-    width: 100%;
-    font-size: 1rem;
-    &:focus {
-      border: 0.1rem solid #997af0;
-      outline: none;
-    }
-  }
-  button {
-    background-color: #4e0eff;
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    &:hover {
-      background-color: #4e0eff;
-    }
-  }
-  span {
-    color: white;
-    text-transform: uppercase;
-    a {
-      color: #4e0eff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  }
-`;

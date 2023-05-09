@@ -3,11 +3,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
-import Logo from "../assets/logo.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { loginUser } from "../services/user";
 import "../assets/creativeTim.css";
+import AuthNav from "../components/AuthNav";
+import Logo from "../assets/logo.svg";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -76,111 +77,55 @@ export default function Login() {
 
   return (
     <>
-      <FormContainer>
-        <div className="col-md-4 form-group">
-          <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h1>Get Love</h1>
-          </div>
-          <div className="form card card-body login-card">
-          <input
-            type="text"
-            placeholder="Username"
+    <AuthNav/>
+    <div style={{marginTop: '150px'}}>
+    <h1 className="title">Sign In</h1>
+      <div className="container card-auth col-md-4" style={{ padding: '20px'}}>
+      <div style={{padding: '10px'}}>
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="inputEmail4">Username</label>
+            <input type="username" class="form-control"
             name="username"
-            onChange={(e) => handleChange(e)}
-            min="3"
-            className="form-control"
-          />
-           <br/>
+            onChange={(e) => handleChange(e)} id="inputEmail4" placeholder="sexy_20"/>
+          </div>
+
+        <div class="form-group col-md-12">
+          <label for="inputAddress">Password</label>
           <input
             type="password"
             placeholder="Password"
-            name="password"
             className="form-control"
+            name="password"
             onChange={(e) => handleChange(e)}
           />
-          <br/>
-          {/* if loading */}
-          <button onClick={handleSubmit}> {loading ? "Loading..." : "Log In"}</button>
-          {/* <button onClick={handleSubmit} >Log In</button> */}
-          <br></br>
-          <span>
-            Don't have an account ? <Link to="/register">Create One.</Link>
-          </span>
-          </div>
         </div>
-      </FormContainer>
+        </div>
+        <button onClick={()=> handleSubmit()} className="btn btn-primary">Sign in</button>
+          <span>
+            Don't have an account ? <Link to="/register">Sign Up.</Link>
+          </span>
+
+        </div>
+      </div>
       <ToastContainer />
+      <footer class="footer">
+                <div class="new-container">
+                <img src={Logo} className="footer__logo" width={400}/>
+                    <ul class="footer__links">
+                        <li>
+                            <a href="#" target="_blank">Privacy policy</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">Terms of use</a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank">© {new Date().getFullYear()} MatchDay</a>
+                        </li>
+                    </ul>
+                </div>
+            </footer>
+            </div>
     </>
   );
 }
-
-
-const FormContainer = styled.div`
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 1rem;
-  align-items: center;
-  background-color: #131324;
-  .brand {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
-    img {
-      height: 5rem;
-    }
-    h1 {
-      color: white;
-      text-transform: uppercase;
-    }
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    background-color: #00000076;
-    border-radius: 2rem;
-    padding: 5rem;
-  }
-  input {
-    background-color: transparent;
-    padding: 1rem;
-    border: 0.1rem solid #4e0eff;
-    border-radius: 0.4rem;
-    color: white;
-    width: 100%;
-    font-size: 1rem;
-    &:focus {
-      border: 0.1rem solid #997af0;
-      outline: none;
-    }
-  }
-  button {
-    background-color: #4e0eff;
-    color: white;
-    padding: 1rem 2rem;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 0.4rem;
-    font-size: 1rem;
-    text-transform: uppercase;
-    &:hover {
-      background-color: #4e0eff;
-    }
-  }
-  span {
-    color: gray;
-    text-transform: uppercase;
-    a {
-      color: #4e0eff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  }
-`;

@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import Discover from "./pages/Discover";
 import NotFound from "./pages/404";
 import Tinder from "./pages/Tinder";
+import Favorites from "./pages/Tinder/Favorites";
+import Profile from "./pages/Tinder/Profile";
 export default function App() {
   return (
     <BrowserRouter>
@@ -19,6 +21,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/discover" element={<Discover />} />
         <Route path="/match" element={<Tinder />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/404" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

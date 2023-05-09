@@ -3,6 +3,8 @@
 import './NavBar.css';
 import 'material-react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+
 
 const NavBar = () => {
 
@@ -94,6 +96,7 @@ const NavBar = () => {
                     </div>
                 </div>
             </nav>
+            <ToastContainer />
 
         </>
     );

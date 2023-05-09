@@ -8,13 +8,13 @@ export default function PaymentModal() {
 
     return (
         <>
-            <div classNameName="col-md-12">
-                <div classNameName="card card-body">
+            <div className="col-md-12">
+                <div className="">
                     <div className="modal-container" style={{marginTop: '20px'}}>
                         <h2 className="out">You're out of messages</h2>
                         <p className="accent">This is NOT a subscription.<br />
                             Your credit card will NOT be re-billed.        </p>
-                        <h3 className="center">Select a package:</h3>
+                        {/* <h3 className="center">Select a package:</h3> */}
                         
                         <div className="row">
                         <span className="payment-limited-header" data-testid="payment-error">Limited Offer</span>

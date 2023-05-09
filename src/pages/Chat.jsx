@@ -8,6 +8,7 @@ import ChatContainer from "../components/ChatContainer";
 import Contacts from "../components/Contacts";
 import Welcome from "../components/Welcome";
 import NavBar from "../components/NavBar";
+import SideBar from "../components/SideBar";
 
 
 export default function Chat() {
@@ -63,7 +64,7 @@ export default function Chat() {
 
   return (
     <>
-            <div className="dark dark-content" style={{backgroundColor: '#080420'}}>
+            <div className="" style={{backgroundColor: '#fff'}}>
                 <div className="wrapper">
                     <>
                         <div className="sidebar">
@@ -75,17 +76,15 @@ export default function Chat() {
                             </div>
                         </div>
                     </>
-                    {/* sidebar end */}
                     <div className="main-panel">
                         <NavBar />
-                        {/* <CheckoutForm amount={100} />  */}
-                        <div className="content" style={{backgroundColor: '#080420'}}>
+                        <div className="content" style={{backgroundColor: '#fff'}}>
                             <div className="row">
                                 <div className="col-md-8">
-                                    <div className="card mx-auto" style={{ backgroundColor: '#080420', width: '200vh' }}>
-                                        <div className="card-body" style={{ backgroundColor: '#080420' }}>
+                                    <div className=" mx-auto" style={{ backgroundColor: '#fff', }}>
+                                        <div className="card-body" style={{ backgroundColor: '#fff' }}>
                                             {/* chat */}
-                                            <div className="container" style={{ backgroundColor: '#080420' }}>
+                                            <div className="container" style={{ backgroundColor: '#fff' }}>
                                                 {currentChat === undefined ? (
                                                     <Welcome />
                                                 ) : (
@@ -96,6 +95,7 @@ export default function Chat() {
                                         </div>
                                     </div>
                                 </div>
+                                <SideBar/>
                                 
                             </div>
 

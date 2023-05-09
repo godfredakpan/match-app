@@ -10,7 +10,6 @@ import TinderCards from './TinderCards';
 import SwipeButtons from './SwipeButtons';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 function Tinder() {
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,13 +19,8 @@ function Tinder() {
   }, []);
   return (
     // BEM class naming convention
-    <div className="app">
-      {/* Header */}
-      <Header />
-      {/* TinderCards */}
+    <div className="app" style={{ marginBottom: '100px'}}>
       <TinderCards />
-      {/* SwipeButtons */}
-      {/* <SwipeButtons /> */}
     </div>
   );
 }

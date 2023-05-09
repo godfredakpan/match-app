@@ -24,11 +24,11 @@ export default function Home() {
 
                 <p class="header__slogan">Find the perfect partner for you</p>
 
-                <a class="button button_size-l button_color-white button_w20 mobile-only" href="login" >Login</a><br/>
-                <a class="button button_size-l button_color-white button_w20 mobile-only" href="register" style={{marginBottom: '20px'}} >Join </a>
+                <a class="button button_size-l  button_w20 mobile-only" href="login" >Login</a><br/>
+                <a class="button button_size-l  button_w20 mobile-only" href="register" style={{marginBottom: '20px'}} >Join </a>
                 <a class="button button_size-l button_color-accent button_w20 mobile-only" href="match" >Find Love </a>
                 <div class="header__heart desktop-only">
-                <img src={Logo} className="footer__logo" width={50}/>
+                <img src={Logo} className="footer__logo" width={'100%'}/>
                     {/* <img src="../general/img/logo_heart.svg" alt="heart"/> */}
                 </div>
             </header>
@@ -163,7 +163,7 @@ export default function Home() {
             </main>
             <footer class="footer">
                 <div class="new-container">
-                <img src={Logo} className="footer__logo" width={50}/>
+                <img src={Logo} className="footer__logo" width={'100%'}/>
                     <ul class="footer__links">
                         <li>
                             <a href="#" target="_blank">Privacy policy</a>
@@ -172,7 +172,7 @@ export default function Home() {
                             <a href="#" target="_blank">Terms of use</a>
                         </li>
                         <li>
-                            <a href="#" target="_blank">© {new Date().getFullYear()} MatchDay</a>
+                            <a href="#" target="_blank">© {new Date().getFullYear()} Flirting Dating Match</a>
                         </li>
                     </ul>
                 </div>
