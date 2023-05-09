@@ -104,7 +104,7 @@ function TinderCards() {
         async function fetchData() {
             const response = await getAllModerators();
             setPeople(response)
-            generateModerator()
+            // generateModerator()
         };
         fetchData();
     }, []);
