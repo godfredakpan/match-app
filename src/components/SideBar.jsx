@@ -63,7 +63,7 @@ export default function SideBar() {
                           <li><a href='/match'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-heart'></i>Match Game</a></li>
                           <li><a href='/favorites'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-heart-o'></i>Favorites</a></li>
                           <li><a href='/meet'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-commenting-o'></i>Messages</a></li>
-                          <li><a style={{cursor: 'pointer'}} onClick={()=> setShowModal(true)}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-cubes'></i>Subscription <span  className={creditColor()}>{currentUser.credits}</span></a></li>
+                          <li><a style={{cursor: 'pointer'}} onClick={()=> setShowModal(true)}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-cubes'></i>Credit Unit <span  className={creditColor()}>{currentUser.credits}</span></a></li>
                           <li><a href='/profile'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-user-o'></i>My Profile</a></li>
                         <li><a style={{cursor: 'pointer'}} onClick={()=>handleClick()}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-sign-out'></i>Logout</a></li>
                       </ul>
@@ -92,7 +92,7 @@ export default function SideBar() {
                           <li><a href='/match'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-heart'></i>Match Game</a></li>
                           <li><a href='/favorites'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-heart-o'></i>Favorites</a></li>
                           <li><a href='/meet'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-commenting-o'></i>Messages</a></li>
-                          <li><a style={{cursor: 'pointer'}} onClick={()=> setShowModal(true)}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-cubes'></i>Subscription <span  className={creditColor()}>{currentUser.credits}</span></a></li>
+                          <li><a style={{cursor: 'pointer'}} onClick={()=> setShowModal(true)}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-cubes'></i>Credit Unit <span  className={creditColor()}>{currentUser.credits}</span></a></li>
                           <li><a href='/profile'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-user-o'></i>My Profile</a></li>
                         <li><a style={{cursor: 'pointer'}} onClick={()=>handleClick()}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-sign-out'></i>Logout</a></li>
                       </ul>

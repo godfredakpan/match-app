@@ -35,6 +35,7 @@ function TinderCards() {
     ]);
 
     const [staticPeople, setStaticPeople] = useState([]);
+    const [cardOpen, toggleFilterCard] = useState(false);
     const [values, setValues] = useState({
         minAge: 18,
         maxAge: 30,
@@ -249,8 +250,6 @@ function TinderCards() {
         setPeople(sortedPeople)
     }
 
-    console.log(people);
-
 
     return (
         <>
@@ -258,9 +257,12 @@ function TinderCards() {
             <div className='row'>
 
                 <div className='col-md-8' style={{ marginTop: '50px' }}>
+                    <div style={{cursor: 'pointer'}} className='filter-button container' onClick={() => toggleFilterCard(!cardOpen)}>
+                        <span className='btn-filter'>{cardOpen ? 'Close Filter' : 'Filter Result'}  <i className='fa fa-filter' style={{ color: 'white', marginRight: '20px' }} /></span>
+                           
+                    </div><br/>
+                    { cardOpen && 
                     <div class="filter container">
-                    
-                
                         <div class="filter-options" data-cnt="extended-filters" data-searchbar="filters">
                             <div class="column">
                                 <div>
@@ -334,11 +336,12 @@ function TinderCards() {
                             </div>
                         </div>
                     </div>
+                    }
 
                     {/* </div> */}
                     <div className='container'>
-                        <div className="row tinderCards">
-                            <div className="tinderCards__cardContainer">
+                        <div className="row tinderCards mx-auto">
+                            <div className="tinderCards__cardContainer mx-auto">
                             {people.length === 0 && <div className='col-md-8' style={{ marginTop: '50px' }}>
                                 <h4> No people found, please try again</h4>
                                 <div className='button filter-search' onClick={()=> window.location.reload()}>Try again</div>
@@ -354,9 +357,8 @@ function TinderCards() {
                                         children={() => console.log('person', person)}
                                         onCardLeftScreen={() => outOfFrame(person.name, index)}
                                     >
-
                                         <div
-                                            className="card"
+                                            className="card mx-auto"
                                             style={{ backgroundImage: `url(${person.avatarImage})` }}
                                         >
                                             <h4 className='photo-name'>{person.name}<br />
