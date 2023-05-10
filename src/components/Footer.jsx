@@ -16,7 +16,7 @@ export default function Footer() {
                             <a href="#" target="_blank">Terms of use</a>
                         </li>
                         <li>
-                            <a href="#" target="_blank">© {new Date().getFullYear()} MatchDay</a>
+                            <a href="#" target="_blank">© {new Date().getFullYear()} Flirt Dating Match</a>
                         </li>
                     </ul>
                 </div>
