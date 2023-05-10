@@ -118,7 +118,7 @@ export default function Register() {
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputEmail4">Name</label>
-            <input type="email" class="form-control" placeholder="Name"
+            <input type="name" class="form-control" placeholder="Name"
             name="name"
             onChange={(e) => handleChange(e)} id="inputEmail4"/>
           </div>
