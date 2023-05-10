@@ -30,6 +30,7 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
@@ -48,37 +49,43 @@ export default function Register() {
         "Password and confirm password should be same.",
         toastOptions
       );
+      setLoading(false);
       return false;
     } else if (username.length < 3) {
       toast.error(
         "Username should be greater than 3 characters.",
         toastOptions
       );
+      setLoading(false);
       return false;
     } else if (password.length < 8) {
       toast.error(
         "Password should be equal or greater than 8 characters.",
         toastOptions
       );
+      setLoading(false);
       return false;
     } else if (email === "") {
       toast.error("Email is required.", toastOptions);
+      setLoading(false);
       return false;
     }
 
     else if (values.age === "") {
       toast.error("Age is required.", toastOptions);
+      setLoading(false);
       return false;
     } else if (values.age < 18) {
       toast.error("Age should be greater than 18.", toastOptions);
+      setLoading(false);
       return false;
     }
 
     return true;
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
+    setLoading(true);
     if (handleValidation()) {
       const { email, username, password, name, about, age } = values;
       const { data } = await axios.post(registerRoute, {
@@ -91,7 +98,9 @@ export default function Register() {
       });
 
       if (!data) {
+        setLoading(false);
         toast.error('Error, please try again', toastOptions);
+        
       }
       if (data._id) {
         localStorage.setItem(
@@ -100,11 +109,13 @@ export default function Register() {
         );
 
         toast.success('User registration successful', toastOptions);
-
+        setLoading(false);
         setTimeout(() => {
-        // navigate("/match");
+        navigate("/match");
         }, 1000);
       }
+      console.log(data);
+      toast.error(data.message, toastOptions);
     }
   };
 
@@ -114,7 +125,7 @@ export default function Register() {
   <div style={{ height: '100vh'}}>
     <h1 className="title">Register</h1>
       <div className="container card-auth " style={{marginTop: '20px'}}>
-      <form action="" onSubmit={(event) => handleSubmit(event)} style={{padding: '10px'}}>
+
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="inputEmail4">Name</label>
@@ -191,12 +202,11 @@ export default function Register() {
             onChange={(e) => handleChange(e)}
           />
         </div>
-        <button className="btn btn-primary" type="submit">Sign up</button>
+        <button onClick={() => handleSubmit()} className="btn btn-primary">{loading ? 'Loading...' : 'Register'}</button>
           <span>
             Already have an account ? <Link to="/login">Login.</Link>
           </span>
 
-        </form>
       </div>
       <ToastContainer />
       <Footer />
