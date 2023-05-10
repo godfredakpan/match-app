@@ -212,7 +212,7 @@ function TinderCards() {
     const sortByGender = (gender) => {
 
         const sortedPeople = staticPeople.filter((person) => {
-            return person.gender === gender.toSentenceCase(gender)
+            return person.gender === sentenceCase(gender)
         })
         setPeople(sortedPeople)
     }
