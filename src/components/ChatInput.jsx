@@ -27,7 +27,7 @@ export default function ChatInput({ handleSendMsg }) {
 
   return (
     <Container>
-      <div className="button-container">
+      <div className="button-container mx-auto">
         <div className="emoji">
           <BsEmojiSmileFill onClick={handleEmojiPickerhideShow} />
           {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />}

@@ -61,7 +61,7 @@ const NavBar = () => {
                     </button>
                     <div class="collapse navbar-collapse" id="navigation">
                         <ul class="navbar-nav ml-auto">
-                            <li class="dropdown nav-item">
+                            {/* <li class="dropdown nav-item">
                                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                     <div class=" d-none d-lg-block d-xl-block"></div>
                                     <i class="tim-icons"></i>
@@ -69,7 +69,7 @@ const NavBar = () => {
                                         Notifications
                                     </p>
                                 </a>
-                            </li>
+                            </li> */}
 
                             <li class="dropdown nav-item">
                                 <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">

@@ -115,7 +115,8 @@ export default function ChatContainer({ currentChat, socket }) {
   return (
     <><Container>
       <div className="chat-header">
-        <div className="user-details">
+      <a href="/match"><i style={{color: '#e6304e'}} className="fa fa-2x fa-home"> </i></a><br></br>
+        <div className="user-details mx-auto">
           <div className="avatar">
             <img
               src={`${currentChat.avatarImage}`}
@@ -178,7 +179,7 @@ const Container = styled.div`
     color: #fff;
   }
   @media(max-width: 480px) {
-    height: 70vh;
+    height: 80vh;
     grid-template-rows: 20% 60% 10%;
 }
   @media screen and (min-width: 720px) and (max-width: 1080px) {

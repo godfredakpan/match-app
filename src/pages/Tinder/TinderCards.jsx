@@ -340,7 +340,7 @@ function TinderCards() {
 
                     {/* </div> */}
                     <div className='container'>
-                        <div className="row tinderCards mx-auto">
+                        <div className="row tinderCards">
                             <div className="tinderCards__cardContainer mx-auto">
                             {people.length === 0 && <div className='col-md-8' style={{ marginTop: '50px' }}>
                                 <h4> No people found, please try again</h4>
