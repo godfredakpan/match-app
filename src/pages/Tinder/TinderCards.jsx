@@ -13,16 +13,17 @@ import { getAllModerators } from '../../services/user';
 import { IconButton } from '@material-ui/core';
 import Favorite from '@material-ui/icons/Favorite';
 import SendIcon from '@material-ui/icons/Send';
-import ReplayIcon from '@material-ui/icons/Replay';
+
 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { createFavoriteRoute } from '../../utils/APIRoutes';
-import { generateModerator } from '../elements/GeneratePeople';
+import { generateFemaleModerator, generateMaleModerator } from '../elements/GeneratePeople';
 import { ToastContainer, toast } from 'react-toastify';
 
-import LogoLight from "../../assets/flirtLogoDark.svg";
+
 import SideBar from '../../components/SideBar';
+import sentenceCase from '../elements/SentenceCase';
 
 
 function TinderCards() {
@@ -32,6 +33,8 @@ function TinderCards() {
             avatarImage: 'https://miro.medium.com/v2/resize:fit:1400/1*CsJ05WEGfunYMLGfsT2sXA.gif'
         },
     ]);
+
+    const [staticPeople, setStaticPeople] = useState([]);
     const [values, setValues] = useState({
         minAge: 18,
         maxAge: 30,
@@ -104,6 +107,7 @@ function TinderCards() {
         async function fetchData() {
             const response = await getAllModerators();
             setPeople(response)
+            setStaticPeople(response)
             // generateModerator()
         };
         fetchData();
@@ -157,15 +161,106 @@ function TinderCards() {
 
     const handleChange = (event) => {
         setValues({ ...values, [event.target.name]: event.target.value });
+
+        if (event.target.name === 'minAge') {
+            sortByAge(event.target.value, values.maxAge)
+        }
+
+        if (event.target.name === 'maxAge') {
+            sortByAge(values.minAge, event.target.value)
+        }
+
+        // gender 
+        if (event.target.name === 'gender') {
+            sortByGender(event.target.value)
+        }
+
+        // region
+        if (event.target.name === 'region') {
+            sortByRegion(event.target.value)
+        }
+
+        // appearance
+        if (event.target.name === 'appearance') {
+            sortByAppearance(event.target.value)
+        }
+
+        // hair color
+        if (event.target.name === 'hairColor') {
+            sortByHairColor(event.target.value)
+        }
+
     };
+
+    console.log('region', values)
+
+    const generateFeMale = () => {
+        generateFemaleModerator();
+    }
+
+    const generateMale = () => {
+        generateMaleModerator();
+    }
+    // sort people by age min and max
+    const sortByAge = (min, max) => {
+        const sortedPeople = staticPeople.filter((person) => {
+            return person.age >= min && person.age <= max
+        })
+        setPeople(sortedPeople)
+    }
+
+    const sortByGender = (gender) => {
+
+        const sortedPeople = staticPeople.filter((person) => {
+            return person.gender === gender.toSentenceCase(gender)
+        })
+        setPeople(sortedPeople)
+    }
+
+    // sort by region
+    const sortByRegion = (region) => {
+        const sortedPeople = staticPeople.filter((person) => {
+            return person.region === sentenceCase(region)
+        })
+        setPeople(sortedPeople)
+    }
+
+    // sort by appearance
+    const sortByAppearance = (appearance) => {
+        const sortedPeople = staticPeople.filter((person) => {
+            return person.appearance === sentenceCase(appearance)
+        })
+        setPeople(sortedPeople)
+    }
+
+    // sort by hair color
+    const sortByHairColor = (hairColor) => {
+        const sortedPeople = staticPeople.filter((person) => {
+            return person.hairColor === sentenceCase(hairColor)
+        })
+        setPeople(sortedPeople)
+    }
+
+    // sort by all filters
+    const sortByAll = (min, max, gender, region, appearance, hairColor) => {
+        const sortedPeople = staticPeople.filter((person) => {
+            return person.age >= min && person.age <= max && person.region === sentenceCase(region) && person.appearance === sentenceCase(appearance) && person.hairColor === sentenceCase(hairColor)
+        })
+        setPeople(sortedPeople)
+    }
+
+    console.log(people);
+
 
     return (
         <>
           <ToastContainer />
             <div className='row'>
+
                 <div className='col-md-8' style={{ marginTop: '50px' }}>
                     <div class="filter container">
-                       
+                    
+                
                         <div class="filter-options" data-cnt="extended-filters" data-searchbar="filters">
                             <div class="column">
                                 <div>
@@ -176,7 +271,6 @@ function TinderCards() {
                                         {/* max input field */}
                                         <input type="text" id="age-value" name='maxAge' onChange={(e) => handleChange(e)} data-field="maxAge" value={values.maxAge} />
                                     </p>
-                                  
                                     <p></p>
                                     {/* <div class="slider ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"><div class="ui-slider-range ui-corner-all ui-widget-header" style={{ left: '11.1111%', width: '2.46914%' }}></div><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style={{ left: '11.1111%' }}></span><span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default fa fa-dropdown" style={{ left: '13.5802%' }}></span></div> */}
                                 </div>
@@ -184,8 +278,8 @@ function TinderCards() {
                                     <select data-field="gender" name='gender' onChange={(e) => handleChange(e)} required="" data-type="dropdown">
                                         <option value="all" selected="">
                                             Gender        </option>
-                                        <option value="male">Man</option>
-                                        <option selected="selected" value="female">Woman</option></select>
+                                        <option value="Male">Man</option>
+                                        <option selected="selected" value="Female">Woman</option></select>
                                 </div>
                                 <div class="form-field dropdowns">
                                     <select data-field="region" name='region' onChange={(e) => handleChange(e)} required="" data-type="dropdown">
@@ -208,7 +302,15 @@ function TinderCards() {
                                     <select onChange={(e) => handleChange(e)} id="appearance" name="appearance" data-field="appearance" data-required="false">
                                         <option selected="selected" value="default" disabled="">Appearance</option>
                                         <option value="all">All appearances</option>
-                                        <option value="asian">Asian</option><option value="ebony">Ebony</option><option value="arabic">Arabic</option><option value="white">White</option><option value="latin">Latin</option></select>
+                                        <option value="asian">Asian</option>
+                                        <option value="ebony">Ebony</option>
+                                        <option value="arabic">Arabic</option>
+                                        <option value="white">White</option>
+                                        <option value="latin">Latin</option>
+                                        <option value="indian">Indian</option>
+                                        <option value="mixed">Mixed</option>
+                                        <option value="caucasian">Caucasian</option>
+                                    </select>
                                 </div>
                                 <div class="form-field dropdowns">
                                     <select data-field="hairColor" name='hairColor' onChange={(e) => handleChange(e)} required="" data-type="dropdown">
@@ -225,16 +327,22 @@ function TinderCards() {
                                         <option value="colored">Other</option>
                                     </select>
                                 </div>
-                                <div class="button filter-search" data-searchbutton="">Search</div>
+                                {/* sortByAll */}
+                                <div className='button filter-search' onClick={()=> sortByAll(values.minAge, values.maxAge, values.gender, values.region, values.appearance, values.hairColor)}>Search</div>
+                                {/* <div onClick={()=>generateMale()}  class="button filter-search" data-searchbutton="">Generate Male</div>
+                                <div onClick={()=>generateFeMale()}  class="button filter-search" data-searchbutton="">Generate Female</div> */}
                             </div>
                         </div>
                     </div>
 
                     {/* </div> */}
                     <div className='container'>
-                        <div className="row">
+                        <div className="row tinderCards">
                             <div className="tinderCards__cardContainer">
-                                
+                            {people.length === 0 && <div className='col-md-8' style={{ marginTop: '50px' }}>
+                                <h4> No people found, please try again</h4>
+                                <div className='button filter-search' onClick={()=> window.location.reload()}>Try again</div>
+                            </div>}
                                 {people.map((person, index) => (
                                     <TinderCard
                                         ref={childRefs[index]}

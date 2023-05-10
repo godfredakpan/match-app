@@ -128,7 +128,7 @@ export default function SetAvatar() {
             <h1>Pick an Avatar as your profile picture</h1>
           </div>
 
-          <span style={{color: 'white'}}>Photo: <span className='text-warning'>Image should not exceed 1MB</span></span>
+          <span style={{color: 'white'}}>Photo: <span className='text-warning'>Image should not exceed 5MB</span></span>
           {uploadLoading && <p className="text-success">Loading...</p>}
           {image ? <img width="10%" className="img-profile" src={image} alt="" /> : <img className="img-profile" src={getRandomAvatar} width="10%" alt="" />
           }

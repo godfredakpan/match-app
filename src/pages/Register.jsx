@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { registerRoute } from "../utils/APIRoutes";
 import "../assets/creativeTim.css";
 import AuthNav from "../components/AuthNav";
+import Footer from "../components/Footer";
 
 
 export default function Register() {
@@ -198,22 +199,7 @@ export default function Register() {
         </form>
       </div>
       <ToastContainer />
-      <footer class="footer" >
-                <div class="new-container">
-                {/* <img src={Logo} className="footer__logo" width={50}/> */}
-                    <ul class="footer__links">
-                        <li>
-                            <a href="#" target="_blank">Privacy policy</a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank">Terms of use</a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank">© {new Date().getFullYear()} MatchDay</a>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
+      <Footer />
       </div>
     </>
   );

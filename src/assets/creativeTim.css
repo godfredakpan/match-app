@@ -19058,7 +19058,7 @@
   .form-control[disabled],
   .form-control[readonly],
   fieldset[disabled] .form-control {
-    background-color: #1d253b;
+    background-color: #DDDDDD;
     color: #344675;
     cursor: not-allowed;
   }

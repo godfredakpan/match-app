@@ -8,11 +8,15 @@ import PaymentModal from "../pages/PaymentModal";
 import axios from "axios";
 import { logoutRoute } from "../utils/APIRoutes";
 import { useNavigate } from "react-router-dom";
+import { Button, Offcanvas } from 'react-bootstrap';
+import Footer from "./Footer";
 
 export default function SideBar() {
     const [currentUser, setCurrentUser] = useState({});
     const [showModal, setShowModal] = useState(false);
+    const [showSidebar, setShowSidebar] = useState(false);
 
+    const toggleSidebar = () => setShowSidebar(!showSidebar);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -44,7 +48,10 @@ export default function SideBar() {
 
   return (
     
-    <><div className='col-md-3 card-sidebar'>
+    <>
+      
+      {/* web only */}
+      <div className='col-md-3 card-sidebar d-none d-md-block' >
           <div className='container'>
               <div className='card-body'>
                   <img class="img-responsive" style={{ width: '100%' }}
@@ -56,7 +63,7 @@ export default function SideBar() {
                           <li><a href='/match'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-heart'></i>Match Game</a></li>
                           <li><a href='/favorites'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-heart-o'></i>Favorites</a></li>
                           <li><a href='/meet'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-commenting-o'></i>Messages</a></li>
-                          <li><a style={{cursor: 'pointer'}} onClick={()=> setShowModal(true)}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-cubes'></i>Credit <span  className={creditColor()}>{currentUser.credits}</span></a></li>
+                          <li><a style={{cursor: 'pointer'}} onClick={()=> setShowModal(true)}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-cubes'></i>Subscription <span  className={creditColor()}>{currentUser.credits}</span></a></li>
                           <li><a href='/profile'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-user-o'></i>My Profile</a></li>
                         <li><a style={{cursor: 'pointer'}} onClick={()=>handleClick()}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-sign-out'></i>Logout</a></li>
                       </ul>
@@ -68,6 +75,41 @@ export default function SideBar() {
 
           </div>
       </div>
+
+    <Offcanvas show={showSidebar} onHide={toggleSidebar} placement="end" className="d-sm-none">
+        <Offcanvas.Header closeButton>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+    <div className='col-md-12 card-sidebar'>
+          <div className='container'>
+              <div className='card-body'>
+                  <img class="img-responsive" style={{ width: '100%' }}
+                      src={LogoLight} alt="" />
+
+                  <br></br>
+                  <div className='sidebar-options'>
+                      <ul className='sidebar-links'>
+                          <li><a href='/match'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-heart'></i>Match Game</a></li>
+                          <li><a href='/favorites'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-heart-o'></i>Favorites</a></li>
+                          <li><a href='/meet'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-commenting-o'></i>Messages</a></li>
+                          <li><a style={{cursor: 'pointer'}} onClick={()=> setShowModal(true)}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-cubes'></i>Subscription <span  className={creditColor()}>{currentUser.credits}</span></a></li>
+                          <li><a href='/profile'> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-user-o'></i>My Profile</a></li>
+                        <li><a style={{cursor: 'pointer'}} onClick={()=>handleClick()}> <i style={{ color: 'red', marginRight: '20px' }} className='fa fa-sign-out'></i>Logout</a></li>
+                      </ul>
+                  </div>
+              </div>
+              <span data-view="grid" data-link="members" data-members-link="grid" class="menu-link">
+
+              </span>
+
+          </div>
+      </div>
+      </Offcanvas.Body>
+      </Offcanvas>
+      <Footer />
+      <Button className="d-block d-sm-none toggle-button"  variant="primary" onClick={toggleSidebar}>
+        <i className="fa fa-bars"></i>
+        </Button>
       <Modal
           show={showModal}
           onHide={() => setShowModal(false)}

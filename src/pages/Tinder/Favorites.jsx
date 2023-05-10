@@ -41,7 +41,7 @@ function Favorites() {
     return (
         <>
             <div className='row'>
-                <div className='col-md-8' style={{ marginTop: '50px' }}>
+                <div className='col-md-8' style={{ marginTop: '50px', marginBottom: '200px' }}>
                     
                     <div class="container">
                         <a href='/match'><i className='fa fa-chevron-left ' style={{ float: 'left', color: 'red', marginRight: '20px' }}/></a>

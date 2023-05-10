@@ -12,13 +12,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import StarRateIcon from '@material-ui/icons/StarRate';
 import Favorite from '@material-ui/icons/Favorite';
 // import FlashOnIcon from '@material-ui/icons/FlashOn';
-import { generateModerator } from '../elements/GeneratePeople';
 
 
 function SwipeButtons() {
-    const generate = () => {
-        generateModerator()
-    }
+
     return(
         <div className="swipeButtons">
             {/* <IconButton className="swipeButtons__repeat">

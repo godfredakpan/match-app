@@ -20,7 +20,12 @@ function Tinder() {
   return (
     // BEM class naming convention
     <div className="app" style={{ marginBottom: '100px'}}>
+      {/* Header */}
+      {/* <Header /> */}
+      {/* TinderCards */}
       <TinderCards />
+      {/* SwipeButtons */}
+      {/* <SwipeButtons /> */}
     </div>
   );
 }
