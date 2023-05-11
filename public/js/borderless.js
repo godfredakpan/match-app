@@ -17,7 +17,7 @@
     /*------------- create overlay -------------*/
     $.createOverlay = function() {
         if ($('.overlay').length < 1) {
-            body_.addClass('no-scroll').append('<div class="overlay"></div>');
+            body_.addClass('no-scroll').append('<div className="overlay"></div>');
             $('.overlay').addClass('show');
         }
     };
@@ -67,10 +67,10 @@
                 var $this = $(this);
                 if ($this.next('ul').length) {
                     if (body_.hasClass('horizontal-side-menu')) {
-                        $this.append('<i class="sub-menu-arrow ti-angle-right"></i>');
+                        $this.append('<i className="sub-menu-arrow ti-angle-right"></i>');
                         $('.side-menu .side-menu-body > ul > li > a > .sub-menu-arrow').removeClass('ti-angle-right').addClass('ti-angle-down');
                     } else {
-                        $this.append('<i class="sub-menu-arrow ti-plus"></i>');
+                        $this.append('<i className="sub-menu-arrow ti-plus"></i>');
                     }
                 }
             });
@@ -148,7 +148,7 @@
         .find("th")
         .each(function(i) {
             $(".table-responsive-stack td:nth-child(" + (i + 1) + ")").prepend(
-                '<span class="table-responsive-stack-thead">' +
+                '<span className="table-responsive-stack-thead">' +
                 $(this).text() +
                 ":</span> "
             );

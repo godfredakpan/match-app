@@ -555,7 +555,7 @@
 			c.columns = ts.computeColumnIndex( c.$table.children( 'thead, tfoot' ).children( 'tr' ) );
 			// add icon if cssIcon option exists
 			icon = c.cssIcon ?
-				'<i class="' + ( c.cssIcon === ts.css.icon ? ts.css.icon : c.cssIcon + ' ' + ts.css.icon ) + '"></i>' :
+				'<i className="' + ( c.cssIcon === ts.css.icon ? ts.css.icon : c.cssIcon + ' ' + ts.css.icon ) + '"></i>' :
 				'';
 			// redefine c.$headers here in case of an updateAll that replaces or adds an entire header cell - see #683
 			c.$headers = $( $.map( c.$table.find( c.selectorHeaders ), function( elem, index ) {
@@ -585,7 +585,7 @@
 							template = header;
 						}
 					}
-					$elem.html( '<div class="' + ts.css.headerIn + '">' + template + '</div>' ); // faster than wrapInner
+					$elem.html( '<div className="' + ts.css.headerIn + '">' + template + '</div>' ); // faster than wrapInner
 				}
 				if ( c.onRenderHeader ) {
 					c.onRenderHeader.apply( $elem, [ index, c, c.$table ] );
@@ -2373,7 +2373,7 @@
 				$colgroup.remove();
 			}
 			if ( c.widthFixed && c.$table.children( 'colgroup' ).length === 0 ) {
-				$colgroup = $( '<colgroup class="' + ts.css.colgroup + '">' );
+				$colgroup = $( '<colgroup className="' + ts.css.colgroup + '">' );
 				overallWidth = c.$table.width();
 				// only add col for visible columns - fixes #371
 				$tbodies = c.$tbodies.find( 'tr:first' ).children( ':visible' );
@@ -2471,7 +2471,7 @@
 			table = $( table )[ 0 ];
 			if ( getIt ) {
 				table.isProcessing = true;
-				$tb.before( '<colgroup class="tablesorter-savemyplace"/>' );
+				$tb.before( '<colgroup className="tablesorter-savemyplace"/>' );
 				return $.fn.detach ? $tb.detach() : $tb.remove();
 			}
 			var holdr = $( table ).find( 'colgroup.tablesorter-savemyplace' );

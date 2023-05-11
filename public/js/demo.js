@@ -21,7 +21,7 @@ demo = {
         image_src = $page.data('image');
 
         if(image_src !== undefined){
-            image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>';
+            image_container = '<div className="full-page-background" style="background-image: url(' + image_src + ') "/>';
             $page.append(image_container);
         }
     },
@@ -58,8 +58,8 @@ demo = {
           // on select we show the Sweet Alert modal with an input
           Swal.fire({
             title: 'Create an Event',
-            html: '<div class="form-group">' +
-              '<input class="form-control text-default" placeholder="Event Title" id="input-field">' +
+            html: '<div className="form-group">' +
+              '<input className="form-control text-default" placeholder="Event Title" id="input-field">' +
               '</div>',
             showCancelButton: true,
             confirmButtonClass: 'btn btn-success',
@@ -1200,10 +1200,10 @@ var config = {
           buttonsStyling: false,
           focusConfirm: false,
           confirmButtonText:
-            '<i class="fa fa-thumbs-up"></i> Great!',
+            '<i className="fa fa-thumbs-up"></i> Great!',
           confirmButtonAriaLabel: 'Thumbs up, great!',
           cancelButtonText:
-            '<i class="fa fa-thumbs-down"></i>',
+            '<i className="fa fa-thumbs-down"></i>',
           cancelButtonAriaLabel: 'Thumbs down'
         })
     	}else if(type == 'auto-close'){

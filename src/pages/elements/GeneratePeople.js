@@ -209,12 +209,22 @@ async function generateRandomMaleProfile() {
 
   
 export async function generateFemaleModerator() {
+    // for (let i = 0; i < 100; i++) {
+    // const data = await generateRandomFemaleProfile();
+    // const createdData = createModerator(data)
+    // return createdData;
+    // }
     const data = await generateRandomFemaleProfile();
     const createdData = createModerator(data)
     return createdData;
 }
 
 export async function generateMaleModerator() {
+    // for (let i = 0; i < 100; i++) {
+    //     const data = await generateRandomMaleProfile();
+    //     const createdData = createModerator(data)
+    //     return createdData;
+    // }
     const data = await generateRandomMaleProfile();
     const createdData = createModerator(data)
     return createdData;

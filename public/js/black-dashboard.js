@@ -157,7 +157,7 @@ $(document).on('click', '.navbar-toggle', function() {
       $toggle.addClass('toggled');
     }, 580);
 
-    var div = '<div class="bodyClick"></div>';
+    var div = '<div className="bodyClick"></div>';
     $(div).appendTo('body').click(function() {
       $html.removeClass('nav-open');
       blackDashboard.misc.navbar_menu_visible = 0;

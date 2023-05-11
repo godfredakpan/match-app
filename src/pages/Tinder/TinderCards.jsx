@@ -1,33 +1,25 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect} from 'react';
 
 // import css
 import './TinderCards.css';
 
-// import tinder card
-import TinderCard from 'react-tinder-card';
-
-// import axios instance that we havwe created
-import CloseIcon from '@material-ui/icons/Close';
-
 import { getAllModerators } from '../../services/user';
-import { IconButton } from '@material-ui/core';
-import Favorite from '@material-ui/icons/Favorite';
-import SendIcon from '@material-ui/icons/Send';
-
-
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { createFavoriteRoute } from '../../utils/APIRoutes';
 import { generateFemaleModerator, generateMaleModerator } from '../elements/GeneratePeople';
 import { ToastContainer, toast } from 'react-toastify';
 
 
 import SideBar from '../../components/SideBar';
 import sentenceCase from '../elements/SentenceCase';
+import SwipeCard from './SwipeCard';
 
 
 function TinderCards() {
+    
     const [people, setPeople] = useState([
+        {
+            name: 'Loading...',
+            avatarImage: 'https://miro.medium.com/v2/resize:fit:1400/1*CsJ05WEGfunYMLGfsT2sXA.gif'
+        },
         {
             name: 'Loading...',
             avatarImage: 'https://miro.medium.com/v2/resize:fit:1400/1*CsJ05WEGfunYMLGfsT2sXA.gif'
@@ -45,120 +37,20 @@ function TinderCards() {
         hairColor: "",
 
     });
-    const [currentIndex, setCurrentIndex] = useState(people.length - 1)
-    const [lastDirection, setLastDirection] = useState()
-    const currentIndexRef = useRef(currentIndex)
-
-    const childRefs = useMemo(
-        () =>
-            Array(people.length)
-                .fill(0)
-                .map((i) => React.createRef()),
-        []
-    )
-
-    const updateCurrentIndex = (val) => {
-        setCurrentIndex(val)
-        currentIndexRef.current = val
-    }
-
-    const canGoBack = currentIndex < people.length - 1
-
-    const canSwipe = currentIndex >= 0
-
-    // set last direction and decrease current index
-    const swiped = (direction, index, contact) => {
-        if (direction === 'right') {
-            createFav(contact);
-            localStorage.setItem('lovedContact', JSON.stringify(contact));
-        }
-        setLastDirection(direction)
-        updateCurrentIndex(index - 1)
-    }
-
-    const outOfFrame = (name, idx) => {
-        currentIndexRef.current >= idx && childRefs[idx].current.restoreCard()
-    }
-
-    const swipe = async (dir, contact) => {
-        if (dir === 'right') {
-            createFav(contact);
-            toast.success(`Added ${contact.name} to your favorites`);
-            localStorage.setItem('lovedContact', JSON.stringify(contact));
-        }
-        if (dir === 'left') {
-            toast.info(`Skipped ${contact.name}`);
-        }
-        if (canSwipe && currentIndex < people.length) {
-            await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
-        }
-    }
-
-    // increase current index and show card
-    const goBack = async () => {
-        if (!canGoBack) return
-        const newIndex = currentIndex + 1
-        updateCurrentIndex(newIndex)
-        await childRefs[newIndex].current.restoreCard()
-    }
-
-    const navigate = useNavigate();
+    
 
     useEffect(() => {
         async function fetchData() {
             const response = await getAllModerators();
-            setPeople(response)
-            setStaticPeople(response)
+            const shuffledPeople = response.sort(() => Math.random() - 0.5);
+            setPeople(shuffledPeople)
+            setStaticPeople(shuffledPeople)
             // generateModerator()
         };
         fetchData();
     }, []);
 
-    // const swiped = (direction, contact) => {
-    //     if(direction === 'left'){
-    //         createFav(contact);
-    //         localStorage.setItem('lovedContact', JSON.stringify(contact));
-    //     }
-    // }
 
-    // const outOfFrame = (name) => {
-    //     console.log(name + " left the screen!")
-    // }
-
-    const createFav = async (contact) => {
-        await axios.post(createFavoriteRoute, {
-            ...contact,
-            id: contact._id,
-            user_id: await JSON.parse(
-                localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-            )._id,
-        });
-    }
-
-    const chatWithUser = async (contact) => {
-        const data = await axios.post(createFavoriteRoute, {
-            ...contact,
-            id: contact._id,
-            user_id: await JSON.parse(
-                localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
-            )._id,
-        });
-
-        if (data.id) {
-            localStorage.setItem('lovedContact', JSON.stringify(contact));
-            navigate("/meet");
-        }
-
-        if (data.status === 202) {
-            localStorage.setItem('lovedContact', JSON.stringify(contact));
-            navigate("/meet");
-        }
-
-        if (!data._id) {
-            toast.error('Something went wrong, please try again')
-        }
-
-    }
 
     const handleChange = (event) => {
         setValues({ ...values, [event.target.name]: event.target.value });
@@ -193,7 +85,6 @@ function TinderCards() {
 
     };
 
-    console.log('region', values)
 
     const generateFeMale = () => {
         generateFemaleModerator();
@@ -250,7 +141,12 @@ function TinderCards() {
         setPeople(sortedPeople)
     }
 
+    function handleSwipe(id, direction) {
+        setPeople(prevData => people.filter(card => card._id !== id));
+        console.log(`Swiped ${direction} on card ${id}`);
+      }
 
+console.log('people', people)
     return (
         <>
           <ToastContainer />
@@ -346,7 +242,10 @@ function TinderCards() {
                                 <h4> No people found, please try again</h4>
                                 <div className='button filter-search' onClick={()=> window.location.reload()}>Try again</div>
                             </div>}
-                                {people.map((person, index) => (
+                            {people.map((person, index) => (
+                            <SwipeCard key={person._id} data={person} onSwipe={handleSwipe} />
+                            ))}
+                                {/* {people.map((person, index) => (
                                     <TinderCard
                                         ref={childRefs[index]}
                                         className="swipe"
@@ -380,7 +279,7 @@ function TinderCards() {
                                             </div>
                                         </div>
                                     </TinderCard>
-                                ))}
+                                ))} */}
                             </div>
                         </div>
                     </div>

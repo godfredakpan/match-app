@@ -884,14 +884,14 @@ jvm.VMLElement.initializeVML = function(){
      * @returns DOMElement
      */
     jvm.VMLElement.prototype.createElement = function (tagName) {
-      return document.createElement('<rvml:' + tagName + ' class="rvml">');
+      return document.createElement('<rvml:' + tagName + ' className="rvml">');
     };
   } catch (e) {
     /**
      * @private
      */
     jvm.VMLElement.prototype.createElement = function (tagName) {
-      return document.createElement('<' + tagName + ' xmlns="urn:schemas-microsoft.com:vml" class="rvml">');
+      return document.createElement('<' + tagName + ' xmlns="urn:schemas-microsoft.com:vml" className="rvml">');
     };
   }
   document.createStyleSheet().addRule(".rvml", "behavior:url(#default#VML)");

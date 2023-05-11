@@ -879,7 +879,7 @@
     tickIcon: classNames.TICKICON,
     showTick: false,
     template: {
-      caret: '<span class="caret"></span>'
+      caret: '<span className="caret"></span>'
     },
     maxOptions: false,
     mobile: false,
@@ -1018,16 +1018,16 @@
 
       if (this.options.header) {
         header =
-          '<div class="' + classNames.POPOVERHEADER + '">' +
-            '<button type="button" class="close" aria-hidden="true">&times;</button>' +
+          '<div className="' + classNames.POPOVERHEADER + '">' +
+            '<button type="button" className="close" aria-hidden="true">&times;</button>' +
               this.options.header +
           '</div>';
       }
 
       if (this.options.liveSearch) {
         searchbox =
-          '<div class="bs-searchbox">' +
-            '<input type="text" class="form-control" autocomplete="off"' +
+          '<div className="bs-searchbox">' +
+            '<input type="text" className="form-control" autocomplete="off"' +
               (
                 this.options.liveSearchPlaceholder === null ? ''
                 :
@@ -1039,12 +1039,12 @@
 
       if (this.multiple && this.options.actionsBox) {
         actionsbox =
-          '<div class="bs-actionsbox">' +
-            '<div class="btn-group btn-group-sm btn-block">' +
-              '<button type="button" class="actions-btn bs-select-all btn ' + classNames.BUTTONCLASS + '">' +
+          '<div className="bs-actionsbox">' +
+            '<div className="btn-group btn-group-sm btn-block">' +
+              '<button type="button" className="actions-btn bs-select-all btn ' + classNames.BUTTONCLASS + '">' +
                 this.options.selectAllText +
               '</button>' +
-              '<button type="button" class="actions-btn bs-deselect-all btn ' + classNames.BUTTONCLASS + '">' +
+              '<button type="button" className="actions-btn bs-deselect-all btn ' + classNames.BUTTONCLASS + '">' +
                 this.options.deselectAllText +
               '</button>' +
             '</div>' +
@@ -1053,9 +1053,9 @@
 
       if (this.multiple && this.options.doneButton) {
         donebutton =
-          '<div class="bs-donebutton">' +
-            '<div class="btn-group btn-block">' +
-              '<button type="button" class="btn btn-sm ' + classNames.BUTTONCLASS + '">' +
+          '<div className="bs-donebutton">' +
+            '<div className="btn-group btn-block">' +
+              '<button type="button" className="btn btn-sm ' + classNames.BUTTONCLASS + '">' +
                 this.options.doneButtonText +
               '</button>' +
             '</div>' +
@@ -1063,27 +1063,27 @@
       }
 
       drop =
-        '<div class="dropdown bootstrap-select' + showTick + inputGroup + '">' +
-          '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" ' + (this.options.display === 'static' ? 'data-display="static"' : '') + 'data-toggle="dropdown"' + autofocus + ' role="button">' +
-            '<div class="filter-option">' +
-              '<div class="filter-option-inner">' +
-                '<div class="filter-option-inner-inner"></div>' +
+        '<div className="dropdown bootstrap-select' + showTick + inputGroup + '">' +
+          '<button type="button" className="' + this.options.styleBase + ' dropdown-toggle" ' + (this.options.display === 'static' ? 'data-display="static"' : '') + 'data-toggle="dropdown"' + autofocus + ' role="button">' +
+            '<div className="filter-option">' +
+              '<div className="filter-option-inner">' +
+                '<div className="filter-option-inner-inner"></div>' +
               '</div> ' +
             '</div>' +
             (
               version.major === '4' ? ''
               :
-              '<span class="bs-caret">' +
+              '<span className="bs-caret">' +
                 this.options.template.caret +
               '</span>'
             ) +
           '</button>' +
-          '<div class="' + classNames.MENU + ' ' + (version.major === '4' ? '' : classNames.SHOW) + '" role="combobox">' +
+          '<div className="' + classNames.MENU + ' ' + (version.major === '4' ? '' : classNames.SHOW) + '" role="combobox">' +
             header +
             searchbox +
             actionsbox +
-            '<div class="inner ' + classNames.SHOW + '" role="listbox" aria-expanded="false" tabindex="-1">' +
-                '<ul class="' + classNames.MENU + ' inner ' + (version.major === '4' ? classNames.SHOW : '') + '">' +
+            '<div className="inner ' + classNames.SHOW + '" role="listbox" aria-expanded="false" tabindex="-1">' +
+                '<ul className="' + classNames.MENU + ' inner ' + (version.major === '4' ? classNames.SHOW : '') + '">' +
                 '</ul>' +
             '</div>' +
             donebutton +
@@ -2032,7 +2032,7 @@
     },
 
     selectPosition: function () {
-      this.$bsContainer = $('<div class="bs-container" />');
+      this.$bsContainer = $('<div className="bs-container" />');
 
       var that = this,
           $container = $(this.options.container),
@@ -2379,7 +2379,7 @@
                       maxOptionsArr = typeof maxOptionsText === 'function' ? maxOptionsText(maxOptions, maxOptionsGrp) : maxOptionsText,
                       maxTxt = maxOptionsArr[0].replace('{n}', maxOptions),
                       maxTxtGrp = maxOptionsArr[1].replace('{n}', maxOptionsGrp),
-                      $notify = $('<div class="notify"></div>');
+                      $notify = $('<div className="notify"></div>');
                   // If {var} is set in array, replace it
                   /** @deprecated */
                   if (maxOptionsArr[2]) {
