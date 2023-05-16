@@ -69,9 +69,9 @@ function TinderCards() {
         }
 
         // region
-        // if (event.target.name === 'region') {
-        //     sortByRegion(event.target.value)
-        // }
+        if (event.target.name === 'region') {
+            sortByRegion(event.target.value)
+        }
 
         // appearance
         // if (event.target.name === 'appearance') {
