@@ -75,7 +75,7 @@ const PaymentForm = ({ amount, totalMessage }) => {
     <StripeCheckout
       email={currentUser?.email}
       token={handleToken}
-      stripeKey="pk_test_51M83kCLyRkndrBXm3tn2pp6ueEOXpujkt3IqspyA31URBKlKyGj95sDxtodCaNR7BzoAV1KThgsfRYMctlOPcfMG00IfAA6Hqj"
+      stripeKey="pk_live_51M83kCLyRkndrBXm5SSZ2zhnGR8eSA8WJwaU9WJQnyapwbbVbY1e3e4c1sXhUrXWEuMUYDcrToydzFM902KLtRQc00LY37INNi"
       amount={amount * 100}
       allowRememberMe={true}
       name="Payment for Credits"
