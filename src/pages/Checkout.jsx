@@ -69,13 +69,15 @@ const PaymentForm = ({ amount, totalMessage }) => {
 
   };
 
+  const stripeKey = process.env.REACT_APP_STRIPE_KEY;
+
 
   return (
     <>
     <StripeCheckout
       email={currentUser?.email}
       token={handleToken}
-      stripeKey="pk_live_51M83kCLyRkndrBXm5SSZ2zhnGR8eSA8WJwaU9WJQnyapwbbVbY1e3e4c1sXhUrXWEuMUYDcrToydzFM902KLtRQc00LY37INNi"
+      stripeKey={stripeKey}
       amount={amount * 100}
       allowRememberMe={true}
       name="Payment for Credits"
