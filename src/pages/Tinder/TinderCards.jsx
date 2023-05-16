@@ -69,19 +69,19 @@ function TinderCards() {
         }
 
         // region
-        if (event.target.name === 'region') {
-            sortByRegion(event.target.value)
-        }
+        // if (event.target.name === 'region') {
+        //     sortByRegion(event.target.value)
+        // }
 
         // appearance
-        if (event.target.name === 'appearance') {
-            sortByAppearance(event.target.value)
-        }
+        // if (event.target.name === 'appearance') {
+        //     sortByAppearance(event.target.value)
+        // }
 
         // hair color
-        if (event.target.name === 'hairColor') {
-            sortByHairColor(event.target.value)
-        }
+        // if (event.target.name === 'hairColor') {
+        //     sortByHairColor(event.target.value)
+        // }
 
     };
 
@@ -146,7 +146,7 @@ function TinderCards() {
         console.log(`Swiped ${direction} on card ${id}`);
       }
 
-console.log('people', people)
+
     return (
         <>
           <ToastContainer />
@@ -177,7 +177,8 @@ console.log('people', people)
                                         <option value="all" selected="">
                                             Gender        </option>
                                         <option value="Male">Man</option>
-                                        <option selected="selected" value="Female">Woman</option></select>
+                                        <option value="Female">Woman</option>
+                                    </select>
                                 </div>
                                 <div class="form-field dropdowns">
                                     <select data-field="region" name='region' onChange={(e) => handleChange(e)} required="" data-type="dropdown">
@@ -226,7 +227,7 @@ console.log('people', people)
                                     </select>
                                 </div>
                                 {/* sortByAll */}
-                                <div className='button filter-search' onClick={()=> sortByAll(values.minAge, values.maxAge, values.gender, values.region, values.appearance, values.hairColor)}>Search</div>
+                                {/* <div className='button filter-search' onClick={()=> sortByAll(values.minAge, values.maxAge, values.gender, values.region, values.appearance, values.hairColor)}>Search</div> */}
                                 {/* <div onClick={()=>generateMale()}  class="button filter-search" data-searchbutton="">Generate Male</div>
                                 <div onClick={()=>generateFeMale()}  class="button filter-search" data-searchbutton="">Generate Female</div> */}
                             </div>
