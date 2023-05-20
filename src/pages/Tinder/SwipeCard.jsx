@@ -82,8 +82,11 @@ function SwipeCard({ data, onSwipe }) {
 
                 <div
                     className="card mx-auto"
-                    style={{ backgroundImage: `url(${data.avatarImage})` }}
+                    style={{ backgroundImage: `url(${data.avatarImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+                    // sty
                 >
+                    {/* img */}
+                    {/* <img src={data.avatarImage} width={500} alt="" /> */}
                     <h4 className='photo-name'>{data.name}<br />
                         <span style={{ fontSize: '12px' }}>{data.age}</span>
                     </h4>

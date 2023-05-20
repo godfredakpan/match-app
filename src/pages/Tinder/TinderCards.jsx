@@ -146,6 +146,37 @@ function TinderCards() {
         console.log(`Swiped ${direction} on card ${id}`);
       }
 
+    //   load 20 of data at a time
+      const [lastIndex, setLastIndex] = useState(20);
+        const [loading, setLoading] = useState(false);
+        const [hasMore, setHasMore] = useState(true);
+
+        useEffect(() => {
+            if (loading) {
+                return;
+            }
+            if (lastIndex >= people.length) {
+                setHasMore(false);
+                return;
+            }
+            function fetchData() {
+                setLoading(true);
+                setTimeout(() => {
+                    setLastIndex(lastIndex + 20);
+                    setLoading(false);
+                }, 10000);
+            }
+            fetchData();
+        }, [loading, lastIndex, people.length]);
+
+        const handleScroll = (e) => {
+            const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
+            if (scrollHeight - scrollTop === clientHeight) {
+                setLoading(true);
+            }
+        };
+
+
     return (
         <>
           <ToastContainer />
@@ -277,51 +308,22 @@ function TinderCards() {
                     }
 
                     {/* </div> */}
-                    <div className='container'>
+                    <div className='container' onScroll={handleScroll}>
                         <div className="row tinderCards mx-auto">
                             <div className="tinderCards__cardContainer mx-auto">
                             {people.length === 0 && <div className='col-md-8' style={{ marginTop: '50px' }}>
                                 <h4> No people found, please try again</h4>
                                 <div className='button filter-search' onClick={()=> window.location.reload()}>Try again</div>
                             </div>}
-                            {people.map((person, index) => (
+
+                            {people.slice(0, lastIndex).map((person, index) => (
                             <SwipeCard key={person._id} data={person} onSwipe={handleSwipe} />
                             ))}
-                                {/* {people.map((person, index) => (
-                                    <TinderCard
-                                        ref={childRefs[index]}
-                                        className="swipe"
-                                        key={person.name}
-                                        restoreCard={true}
-                                        onSwipe={(dir) => swiped(dir, index, person)}
-                                        preventSwipe={["up", "down"]}
-                                        children={() => console.log('person', person)}
-                                        onCardLeftScreen={() => outOfFrame(person.name, index)}
-                                    >
-                                        <div
-                                            className="card mx-auto"
-                                            style={{ backgroundImage: `url(${person.avatarImage})` }}
-                                        >
-                                            <h4 className='photo-name'>{person.name}<br />
-                                                <span style={{ fontSize: '12px' }}>{person.age}</span>
-                                            </h4>
-
-                                            <div className="swipeButtons">
-
-                                                <IconButton onClick={() => swipe('left', person)} className="swipeButtons__left">
-                                                    <CloseIcon fontSize="medium" />
-                                                </IconButton>
-                                                <IconButton onClick={() => chatWithUser(person)} className="swipeButtons__star">
-                                                    <SendIcon fontSize="medium" />
-                                                </IconButton>
-                                                <IconButton onClick={() => swipe('right', person)} className="love__btn">
-                                                    <Favorite fontSize="medium" />
-                                                </IconButton>
-
-                                            </div>
-                                        </div>
-                                    </TinderCard>
-                                ))} */}
+                              <div>{loading && hasMore && (
+                            <div className="loader-container">
+                                <div className="loader"></div>
+                                </div>
+                            )}</div>
                             </div>
                         </div>
                     </div>
