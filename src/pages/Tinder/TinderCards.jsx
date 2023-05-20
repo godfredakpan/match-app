@@ -14,6 +14,12 @@ import SwipeCard from './SwipeCard';
 
 
 function TinderCards() {
+
+    const [lastIndex, setLastIndex] = useState(20);
+
+    const [loading, setLoading] = useState(false);
+
+    const [hasMore, setHasMore] = useState(true);
     
     const [people, setPeople] = useState([
         {
@@ -146,10 +152,6 @@ function TinderCards() {
         console.log(`Swiped ${direction} on card ${id}`);
       }
 
-    //   load 20 of data at a time
-      const [lastIndex, setLastIndex] = useState(20);
-        const [loading, setLoading] = useState(false);
-        const [hasMore, setHasMore] = useState(true);
 
         useEffect(() => {
             if (loading) {
@@ -164,7 +166,7 @@ function TinderCards() {
                 setTimeout(() => {
                     setLastIndex(lastIndex + 20);
                     setLoading(false);
-                }, 10000);
+                }, 50000);
             }
             fetchData();
         }, [loading, lastIndex, people.length]);

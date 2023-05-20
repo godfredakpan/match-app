@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './SwipeCard.css';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import Favorite from '@material-ui/icons/Favorite';
 import SendIcon from '@material-ui/icons/Send';
 import axios from 'axios';
-import { createFavoriteRoute } from '../../utils/APIRoutes';
+import { createFavoriteRoute, sendMessageRoute } from '../../utils/APIRoutes';
 import { useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
 
@@ -13,7 +13,7 @@ import {  toast } from 'react-toastify';
 function SwipeCard({ data, onSwipe }) {
 
     const navigate = useNavigate();
-
+    const socket = useRef();
     const [swipeDirection, setSwipeDirection] = useState(null);
 
     function handleSwipe(direction, contact) {
@@ -46,6 +46,34 @@ function SwipeCard({ data, onSwipe }) {
                 localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
             )._id,
         });
+
+        const data = await JSON.parse(
+            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+          );
+        
+          const gender = (contact) => {
+          if(contact.gender === 'Female'){
+            return "her"
+          }else{
+            return "his"
+          }
+        }
+
+        const msg = `Hey ${data.name}, We just wanted to let you know that flirtdatingmatch.com user ${contact.name} added you to ${gender(contact.gender)} favorites. Since you have already added ${contact.name} to your favorite, you can now send a message to say hi, thank you or something entirely else.`;
+        
+        //   socket.current.emit("send-msg", {
+        //     to: data._id,
+        //     from: contact._id,
+        //     msg,
+        //   });
+      
+          const sendMessage = await axios.post(sendMessageRoute, {
+            from: contact._id,
+            to: data._id,
+            message: msg,
+          });
+
+          console.log(sendMessage);
     }
 
     const chatWithUser = async (contact) => {
