@@ -36,6 +36,7 @@ const PaymentForm = ({ amount, totalMessage }) => {
       amount: amount * 100,
       credits: totalMessage,
       user_id: currentUser._id,
+      transaction_id: token,
       token,
       description: 'Payment of $' + amount,
     };
