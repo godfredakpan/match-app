@@ -166,7 +166,7 @@ function TinderCards() {
                 setTimeout(() => {
                     setLastIndex(lastIndex + 20);
                     setLoading(false);
-                }, 50000);
+                }, 90000);
             }
             fetchData();
         }, [loading, lastIndex, people.length]);

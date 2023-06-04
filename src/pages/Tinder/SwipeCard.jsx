@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useRef, useState } from 'react';
+import React, {  useState } from 'react';
 import './SwipeCard.css';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
@@ -10,20 +10,22 @@ import { createFavoriteRoute, sendMessageRoute } from '../../utils/APIRoutes';
 import { useNavigate } from 'react-router-dom';
 import {  toast } from 'react-toastify';
 import { Modal } from 'react-bootstrap';
+import PaymentModal from '../PaymentModal';
 
 
 function SwipeCard({ data, onSwipe }) {
 
     const navigate = useNavigate();
-    const socket = useRef();
     const [swipeDirection, setSwipeDirection] = useState(null);
     const [message, setMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
 
     function handleSwipe(direction, contact) {
         setSwipeDirection(direction);
         onSwipe(data._id, direction);
         if (direction === 'right') {
+            setShowModal(true);
             createFav(contact);
             toast.success(`You matched with ${contact.name}`);
             localStorage.setItem('lovedContact', JSON.stringify(contact));
@@ -87,6 +89,14 @@ function SwipeCard({ data, onSwipe }) {
 
     const sendMessage = async (contact) => {
         if (!message) return;
+
+        if(await JSON.parse(
+            localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        ).credits === 0){
+            setShowPaymentModal(true);
+            return;
+        }
+
         const data = await axios.post(sendMessageRoute, {
             from: await JSON.parse(
                 localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
@@ -160,6 +170,20 @@ function SwipeCard({ data, onSwipe }) {
             </div>
         </div>
         <Modal
+            show={showPaymentModal}
+            onHide={() => setShowPaymentModal(false)}
+            backdrop="static"
+            keyboard={false}
+            aria-labelledby="contained-modal-title-vcenter"
+            size="md"
+            style={{ width: "100%", borderRadius: "50px" }}
+            >
+                <Modal.Header closeButton></Modal.Header>
+                <Modal.Body>
+                <PaymentModal />
+                </Modal.Body>
+            </Modal>
+        <Modal
             show={showModal}
             onHide={() => setShowModal(false)}
             backdrop="static"
@@ -186,6 +210,8 @@ function SwipeCard({ data, onSwipe }) {
                             </div>
                             
                         </div>
+
+                        <button className="btn btn-danger" onClick={() => setShowModal(false)}>Cancel</button>
                         <button className="btn btn-primary" onClick={() => sendMessage(data)}>Send</button>
                     </div>
                 </div>
